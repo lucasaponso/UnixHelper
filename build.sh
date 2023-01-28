@@ -11,7 +11,7 @@ if [[ $distro_type == "DISTRIB_ID=Ubuntu" ]]; then
 fi
 
 
-read -p "Would you like to create a ssh key (Y/N):" sshkey
+read -p "Would you like to create a ssh key, p.s access to logs are unavailable if ssh key is not generated (Y/N):" sshkey
 
 if [[ $sshkey == 'Y' || $sshkey == 'y' ]]; then
 	ssh-keygen -t ed25519 -C lucasaponso@outlook.com
@@ -31,3 +31,24 @@ fi
 
 git fetch
 git pull
+
+DIR=/mnt/server
+if [ -d "$DIR" ];
+then
+	echo "Directory exists, skipping server mount!!"
+	
+
+else
+	sudo mkdir /mnt/server
+	sudo sshfs -o allow_other,IdentityFile=/$HOME/.ssh/id_ed25519 root@172.105.180.73:/var/www/html /mnt/server/
+	
+fi
+
+
+
+cd tortoise-tts
+rm -rf .git
+pip3 install transformers==4.19.0
+pip3 install -r requirements.txt
+python3 setup.py
+
