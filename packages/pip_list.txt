@@ -72,7 +72,7 @@ networkx
 nltk                     
 num2words                
 numba                    
-numpy                    
+numpy==1.18                    
 nvidia-cublas-cu11       
 nvidia-cuda-nvrtc-cu11   
 nvidia-cuda-runtime-cu11 
@@ -148,3 +148,15 @@ Werkzeug
 wheel                    
 xkit                     
 zipp
+tqdm
+rotary_embedding_torch
+transformers
+tokenizers
+inflect
+progressbar
+einops
+unidecode
+scipy
+librosa
+numba==0.48.0
+ffmpeg

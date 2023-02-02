@@ -46,9 +46,16 @@ fi
 
 
 
-cd tortoise-tts
-rm -rf .git
-pip3 install transformers==4.19.0
-pip3 install -r requirements.txt
-python3 setup.py
+##cd tortoise-tts
+##pwd
+##sudo pip3 install -U scipy
+##sudo pip3 install transformers==4.19.0
+##sudo pip3 install -r $HOME/UnixHelper/packages/requirements.txt
+##sudo python3 setup.py install
+
+
+
+
+##pip3 install requirements
+##python3 setup.py install
 
