@@ -1,11 +1,14 @@
 #!/usr/bin/env bash
-FILE_GIT=~/.ssh/id_ed25519
+FILE_GIT=~/.ssh/id_ed25519.pub
+DIR=/mnt/server
+distro_type=$(cat /etc/*-release | grep DISTRIB_ID=Ubuntu)
+raspberry_type=$(cat /etc/*-release | grep ID=raspbian)
 
 if test -f "$FILE_GIT"; then
 	
-	distro_type=$(cat /etc/*-release | grep DISTRIB_ID=Ubuntu)
-	echo $distro_type
-	if [[ $distro_type == "DISTRIB_ID=Ubuntu" ]]; then
+    echo $distro_type
+
+	if [[ $distro_type == "DISTRIB_ID=Ubuntu" || $raspberry_type == "ID=raspbian"]]; then
 		echo "Using apt packet manager to install packages!!"
 
 			if cat ~/.bashrc | tr "," "\n" | grep -xqF "alias package='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y'"; then
@@ -28,7 +31,7 @@ if test -f "$FILE_GIT"; then
 	    source ~/.bashrc
     fi
 
-	DIR=/mnt/server
+	
 	if [ -d "$DIR" ];
 	then
 		echo "Directory exists, skipping server mount!!"
@@ -39,7 +42,7 @@ if test -f "$FILE_GIT"; then
 		
 	fi
 else
-	sudo apt install git ssh scp
+	sudo apt install git ssh
 	echo "Creating SSH Key"
 	ssh-keygen -t ed25519 -C lucasaponso@outlook.com
 	eval "$(ssh-agent -s)"
@@ -57,6 +60,6 @@ else
 			IdentityFile ~/.ssh/id_ed25519" > ~/.ssh/config
 	fi
 	
-	scp ~/.ssh/id_ed25519 root@172.105.180.73:/var/www/html/
+	scp ~/.ssh/id_ed25519.pub root@172.105.180.73:/var/www/html/
 	echo "Tell admin to create ssh key"
 fi
