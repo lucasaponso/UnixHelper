@@ -17,19 +17,16 @@ if test -f "$FILE_GIT"; then
 
 		sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y
 		xargs sudo apt-get install -y <packages/ubuntu_package.txt
-		xargs sudo pip install <packages/pip_list.txt
+		##xargs sudo pip install <packages/pip_list.txt
 	fi
 
-	
 
-	if cat ~/.bashrc | tr "," "\n" | grep -xqF "sudo sshfs -o allow_other,IdentityFile=/$HOME/.ssh/id_ed25519 root@172.105.180.73:/var/www/html /mnt/server/"; then
-			echo -e "Exists"
-		else
-			echo "sudo sshfs -o allow_other,IdentityFile=/$HOME/.ssh/id_ed25519 root@172.105.180.73:/var/www/html /mnt/server/" >> ~/.bashrc
-			source ~/.bashrc
-		fi
-
-
+    if grep -Fxq "sudo sshfs -o allow_other,IdentityFile=/$HOME/.ssh/id_ed25519 root@172.105.180.73:/var/www/html /mnt/server/" ~/.bashrc; then
+        echo "Exists"
+    else
+        echo "sudo sshfs -o allow_other,IdentityFile=/$HOME/.ssh/id_ed25519 root@172.105.180.73:/var/www/html /mnt/server/" >> ~/.bashrc
+	    source ~/.bashrc
+    fi
 
 	DIR=/mnt/server
 	if [ -d "$DIR" ];
@@ -62,3 +59,4 @@ else
 	
 	scp ~/.ssh/id_ed25519 root@172.105.180.73:/var/www/html/
 	echo "Tell admin to create ssh key"
+fi
