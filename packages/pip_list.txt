@@ -158,5 +158,4 @@ einops
 unidecode
 scipy
 librosa
-numba==0.48.0
 ffmpeg

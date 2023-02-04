@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+ping_status() {
 ping -c1 $1 1>/dev/null 2>/dev/null
 SUCCESS=$?
 
@@ -10,6 +11,7 @@ else
   echo "$1 didn't reply"
   echo "Ping Was Fail" | festival --tts
 fi
-
+}
+ping_status
 
 
