@@ -50,12 +50,12 @@ appending_config() {
 	if test -f "$FILE"; then
 		echo "Host * 
 			AddKeysToAgent yes 
-			IdentityFile ~/.ssh/id_ed25519" > ~/.ssh/config
+			IdentityFile ~/.ssh/id_ed25519" >> ~/.ssh/config
 	else
 		touch ~/.ssh/config
 		echo "Host * 
 			AddKeysToAgent yes  
-			IdentityFile ~/.ssh/id_ed25519" > ~/.ssh/config
+			IdentityFile ~/.ssh/id_ed25519" >> ~/.ssh/config
 	fi
 }
 
