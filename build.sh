@@ -8,6 +8,8 @@
 ## 2. if yes remove alias, mounting point and ssh key
 ## 3. if no echo ok
 ##################################################################################
+
+
 rm_config() {
 
 . ~/.bashrc
@@ -22,6 +24,7 @@ if [[ $delete_config == "Y" ]]; then
 else
 	echo "Ok, keeping current config"
 fi
+. ~/.bashrc
 }
 
 ##################################################################################
@@ -73,12 +76,20 @@ inc/ping.sh 192.168.0.1
 
 echo "View systemctl processes (Y/N:)"
 read answer
-if $answer == 'Y'; then
+if [[ $answer == 'Y' ]]; then
+	sudo systemctl list-units --type=service -all
 	sudo systemctl list-units --type=service -all >> /mnt/server/processes.txt
+	ls -als /mnt/server
 fi
 }
 
+echo $(date)
+echo $(uptime)
+echo "Logged In User:"
+echo $(whoami)
 
+gcc -w inc/main.c -o inc/obj/main
+inc/obj/main
 
 process_networking
 current_config
@@ -114,18 +125,16 @@ if test -f "$FILE_GIT"; then
 	else
 		sudo mkdir /mnt/server
 		. ~/.bashrc
-		
 	fi
 
-    if grep -Fxq "sudo sshfs -o allow_other,IdentityFile=$HOME/.ssh/id_ed25519 root@172.105.180.73:/var/www/html /mnt/server" ~/.bashrc; then
-        . ~/.bashrc
+    	if grep -Fxq "sudo sshfs -o allow_other,IdentityFile=$HOME/.ssh/id_ed25519 root@172.105.180.73:/var/www/html /mnt/server" ~/.bashrc; then
+        	. ~/.bashrc
 		echo "Exists"
-        
-    else
+    	else
 		. ~/.bashrc
-        echo "sudo sshfs -o allow_other,IdentityFile=$HOME/.ssh/id_ed25519 root@172.105.180.73:/var/www/html /mnt/server" >> ~/.bashrc
-	    
-    fi
+		echo $(sudo sshfs -o allow_other,IdentityFile=$HOME/.ssh/id_ed25519 root@172.105.180.73:/var/www/html /mnt/server)
+       		echo "sudo sshfs -o allow_other,IdentityFile=$HOME/.ssh/id_ed25519 root@172.105.180.73:/var/www/html /mnt/server" >> ~/.bashrc
+    	fi
 	. ~/.bashrc
 
 else
@@ -140,45 +149,57 @@ fi
 current_config
 rm_config
 
-echo "Would you like to install GUI applications(Y/N)"
+##git clone https://github.com/ClaireGuerin/bash-install-vscode.git 
+##cd bash-install-vscode
+##chmod 777 install_vscode.sh
+##source install_vscode.sh
+##cd ..
+##rm -rf bash-install-vscode
+##echo "Would you like to install GUI applications(Y/N)"
+##read answer
+
+##if [[ $answer == 'Y' ]];
+##then
+##	echo "Ok"
+##	sudo apt update
+##	sudo apt install software-properties-common apt-transport-https wget -y
+##	wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+##	sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
+##	sudo apt install code
+##	code --version
+##
+##	sudo wget -O- https://download.sublimetext.com/sublimehq-pub.gpg | gpg –dearmor | sudo tee /usr/share/keyrings/sublimehq.gpg
+##	echo ‘deb [signed-by=/usr/share/keyrings/sublimehq.gpg] https://download.sublimetext.com/ apt/stable/’ | sudo tee /etc/apt/sources.list.d/sublime-text.list
+##	sudo apt update
+##	sudo apt install sublime-text
+##
+##	sudo apt install software-properties-common apt-transport-https wget
+##	wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+##	sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main"
+##	sudo apt update
+##	sudo apt install microsoft-edge-stable
+##
+##	sudo apt update
+##	sudo apt install -y build-essential
+##	sudo bash VMware-Workstation-Full-16.2.4-20089737.x86_64.bundle
+##	sudo vmware-modconfig --console --install-all
+##
+##	sudo apt update
+##	sudo add-apt-repository ppa:micahflee/ppa
+##	sudo apt update
+##	sudo apt install torbrowser-launcher
+##else
+##	echo "Ok, not installing GUI options"
+##fi
+. ~/.bashrc
+
+
+
+echo "Would You Like to clone via ssh"
 read answer
 
-if [[ $answer == 'Y' ]];
-then
-	echo "Ok"
-	sudo apt update
-	sudo apt install software-properties-common apt-transport-https wget -y
-	wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
-	sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
-	sudo apt install code
-	code --version
+if [[ $answer == "Y" ]] then;
 
-	sudo wget -O- https://download.sublimetext.com/sublimehq-pub.gpg | gpg –dearmor | sudo tee /usr/share/keyrings/sublimehq.gpg
-	echo ‘deb [signed-by=/usr/share/keyrings/sublimehq.gpg] https://download.sublimetext.com/ apt/stable/’ | sudo tee /etc/apt/sources.list.d/sublime-text.list
-	sudo apt update
-	sudo apt install sublime-text
+git clone git@github.com:lucasaponso/UnixHelper.git ~/
 
-	sudo apt install software-properties-common apt-transport-https wget
-	wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
-	sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main"
-	sudo apt update
-	sudo apt install microsoft-edge-stable
-
-	sudo apt update
-	sudo apt install -y build-essential
-	sudo bash VMware-Workstation-Full-16.2.4-20089737.x86_64.bundle
-	sudo vmware-modconfig --console --install-all
-
-	sudo apt update
-	sudo add-apt-repository ppa:micahflee/ppa
-	sudo apt update
-	sudo apt install torbrowser-launcher
-else
-	echo "Ok, not installing GUI options"
 fi
-
-
-
-
-
-
