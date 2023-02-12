@@ -1,14 +1,14 @@
 # UnixHelper
 ## Setting Up Enviroment
 ```
-chmod 777 build.sh
+sudo apt update && sudo apt upgrade -y && sudo apt autoclean -y && sudo apt autoremove -y
+sudo apt install git -y
+git clone https://github.com/lucasaponso/UnixHelper.git
+chmod 777 UnixHelper/build.sh
+sudo reboot
 ./build.sh
 ```
 
-## Compiling & Running
-```
-python3 live-recog.py
-```
 
 
 
