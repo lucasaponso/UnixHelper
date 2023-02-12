@@ -78,8 +78,10 @@ echo "View systemctl processes (Y/N:)"
 read answer
 if [[ $answer == 'Y' ]]; then
 	sudo systemctl list-units --type=service -all
+	sudo echo "$(date)" >> /mnt/server/processes.txt
 	sudo systemctl list-units --type=service -all >> /mnt/server/processes.txt
-	ls -als /mnt/server
+	sudo echo "\n" >> /mnt/server/processes.txt
+	sudo ls -als /mnt/server
 fi
 }
 
@@ -198,8 +200,7 @@ rm_config
 echo "Would You Like to clone via ssh"
 read answer
 
-if [[ $answer == "Y" ]] then;
-
-git clone git@github.com:lucasaponso/UnixHelper.git ~/
-
+if [[ $answer == "Y" ]]; then
+	git clone git@github.com:lucasaponso/UnixHelper.git ~
 fi
+
