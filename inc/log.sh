@@ -5,12 +5,12 @@ echo "The official language of $1 is "
 case $1 in
 
   apt)
-    echo "Ran package update $(date)" >> /mnt/server/apt-log.txt
+    sudo echo "Ran package update $(date)" >> /mnt/server/apt-log.txt
     cat /mnt/server/apt-log.txt
     ;;
 
   git)
-    echo "Git pull $(date)" >> /mnt/server/gitpull-log.txt
+    sudo echo "Git pull $(date)" >> /mnt/server/gitpull-log.txt
     cat /mnt/server/gitpull-log.txt
     ;;
   run)
