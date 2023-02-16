@@ -9,6 +9,10 @@
 ## 3. if no echo ok
 ##################################################################################
 
+sudo inc/log.sh apt
+sudo inc/log.sh git
+sudo inc/log.sh run
+sudo inc/log.sh data
 
 rm_config() {
 
@@ -78,9 +82,9 @@ echo "View systemctl processes (Y/N:)"
 read answer
 if [[ $answer == 'Y' ]]; then
 	sudo systemctl list-units --type=service -all
-	sudo echo "$(date)" >> /mnt/server/processes.txt
+	echo "$(date)" >> /mnt/server/processes.txt
 	sudo systemctl list-units --type=service -all >> /mnt/server/processes.txt
-	sudo echo "\n" >> /mnt/server/processes.txt
+	echo "\n" >> /mnt/server/processes.txt
 	sudo ls -als /mnt/server
 fi
 }
@@ -90,8 +94,8 @@ echo $(uptime)
 echo "Logged In User:"
 echo $(whoami)
 
-gcc -w inc/main.c -o inc/obj/main
-inc/obj/main
+gcc -w inc/led.c -o inc/obj/led
+inc/obj/led
 
 process_networking
 current_config
@@ -203,4 +207,3 @@ read answer
 if [[ $answer == "Y" ]]; then
 	git clone git@github.com:lucasaponso/UnixHelper.git ~
 fi
-

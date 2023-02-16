@@ -5,7 +5,24 @@ from threading import Thread
 from datetime import datetime
 from colorama import Fore, init, Back
 import getpass
+import public_ip as ip
+# import mysql.connector
 
+# mydb = mysql.connector.connect(
+# host="localhost",
+# user="root",
+# password="password",
+# database="messenger"
+# )
+# mycursor = mydb.cursor()
+
+# sql = "INSERT INTO users (name, ipaddr, username, passwd) VALUES (%s, %s)"
+# val = ("John23" "192.168.1.1" "lucasa2002" "tess1234")
+# mycursor.execute(sql, val)
+
+# mydb.commit()
+
+# print(mycursor.rowcount, "record inserted.")
 
 # init colors
 init()
@@ -27,6 +44,9 @@ SERVER_HOST = "172.105.180.73"
 SERVER_PORT = 5002 # server's port
 separator_token = "<SEP>" # we will use this to separate the client name & message
 
+
+
+    
 # initialize TCP socket
 s = socket.socket()
 print(f"[*] Connecting to {SERVER_HOST}:{SERVER_PORT}...")
@@ -35,6 +55,17 @@ s.connect((SERVER_HOST, SERVER_PORT))
 print("[+] Connected.")
 # prompt the client for a name
 name = input("Enter your name: ")
+username = input("Enter your username: ")
+passwd = getpass.getpass(prompt = "Enter a Strong Password: ")
+ipaddress_client = ip.get()
+
+print(name, username, passwd, ipaddress_client)
+
+
+
+
+
+
 
 def listen_for_messages():
     while True:

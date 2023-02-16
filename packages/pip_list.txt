@@ -159,3 +159,6 @@ unidecode
 scipy
 librosa
 ffmpeg
+colorama
+public-ip
+mysql.connector
