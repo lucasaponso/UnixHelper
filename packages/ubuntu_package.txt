@@ -66,5 +66,4 @@ gnustep-gui-runtime
 ssmtp
 ufw
 mailutils
-virtualbox
-mysql-server
+
