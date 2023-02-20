@@ -6,23 +6,6 @@ from datetime import datetime
 from colorama import Fore, init, Back
 import getpass
 import public_ip as ip
-# import mysql.connector
-
-# mydb = mysql.connector.connect(
-# host="localhost",
-# user="root",
-# password="password",
-# database="messenger"
-# )
-# mycursor = mydb.cursor()
-
-# sql = "INSERT INTO users (name, ipaddr, username, passwd) VALUES (%s, %s)"
-# val = ("John23" "192.168.1.1" "lucasa2002" "tess1234")
-# mycursor.execute(sql, val)
-
-# mydb.commit()
-
-# print(mycursor.rowcount, "record inserted.")
 
 # init colors
 init()
@@ -89,7 +72,7 @@ while True:
         break
     # add the datetime, name & the color of the sender
     date_now = datetime.now().strftime('%Y-%m-%d %H:%M:%S') 
-    to_send = f"{client_color}[{date_now}] {name}{separator_token}{to_send}{Fore.RESET}"
+    to_send = f"{client_color}[{date_now}] {username}{separator_token}{to_send}{Fore.RESET}"
     # finally, send the message
     s.send(to_send.encode())
 

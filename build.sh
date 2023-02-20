@@ -121,7 +121,7 @@ if test -f "$FILE_GIT"; then
 			fi
         sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt autoclean -y
 		xargs sudo apt-get install -y <packages/ubuntu_package.txt
-		xargs sudo pip install <packages/pip_list.txt
+		##xargs sudo pip install <packages/pip_list.txt
 	fi
 
 

@@ -42,7 +42,7 @@ bzip2
 perl
 tar
 cpio
-python
+python3
 unzip
 rsync
 wget

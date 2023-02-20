@@ -160,5 +160,5 @@ scipy
 librosa
 ffmpeg
 colorama
-public-ip
+public_ip
 mysql.connector
